@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rethinking Parent's role in the ed-tech industry — Srotaswini</title>
+<link rel="stylesheet" href="./site.css?v=20261013a">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+<style>
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #FFFFFF; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: #F95C4B; }
+  .ed-band { position: relative; border-radius: 20px; overflow: hidden; color: #FFFFFF; padding: 72px 48px; }
+  .ed-band img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .ed-band::after { content: ""; position: absolute; inset: 0; background: rgba(16,16,16,.45); }
+  .ed-band > div { position: relative; z-index: 1; }
+  .ed-quote { font-family: 'Uncut Sans', 'Instrument Sans', sans-serif; font-size: 44px; line-height: 1.15; letter-spacing: -.025em; font-weight: 600; text-align: center; margin: 0; }
+  .ed-hmw { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  .ed-hmw > div { border: 1px solid #ECEAE4; border-radius: 14px; padding: 22px; }
+  .ed-hmw .n { font-size: 20px; font-weight: 700; color: #B199B8; margin-bottom: 12px; }
+  .ed-hmw p { font-size: 16px; font-weight: 600; line-height: 1.5; margin: 0; color: #101010; }
+  .ed-feats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 32px; margin-top: 24px; }
+  .ed-feats h4 { font-size: 17px; font-weight: 700; margin: 0 0 8px; }
+  .ed-feats p { font-size: 15px; line-height: 1.6; color: #4a463d; margin: 0; }
+  .ed-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+  .ed-row2 img { display: block; width: 100%; height: auto; }
+  .ed-side { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 48px; align-items: start; margin-top: 24px; }
+  .ed-scroll { position: relative; height: 560px; overflow-y: auto; border: 1px solid #ECEAE4; border-radius: 16px; background: #FFFFFF; scrollbar-width: thin; scrollbar-color: #D9D5CC transparent; }
+  .ed-scroll img { display: block; width: 100%; height: auto; }
+  .ed-scroll-hint { position: sticky; bottom: 0; text-align: center; font-size: 12px; font-weight: 600; color: #6f6959; padding: 26px 0 10px; background: linear-gradient(rgba(255,255,255,0), #FFFFFF 55%); pointer-events: none; }
+  .ed-car-view { position: relative; overflow: hidden; border-radius: 16px; }
+  .ed-car-track { display: flex; transition: transform .6s cubic-bezier(.22,.7,.2,1); }
+  .ed-car-track img { flex: 0 0 100%; width: 100%; height: auto; display: block; }
+  .ed-car-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 999px; border: none; background: rgba(255,255,255,.92); color: #101010; font-size: 20px; cursor: pointer; box-shadow: 0 4px 14px rgba(16,16,16,.12); }
+  .ed-car-prev { left: 14px; } .ed-car-next { right: 14px; }
+  .ed-car-dots { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
+  .ed-car-dots button { width: 8px; height: 8px; border-radius: 999px; border: none; padding: 0; cursor: pointer; background: #E3DBCC; transition: width .25s ease, background .25s ease; }
+  .ed-car-dots button.is-on { width: 22px; background: #101010; }
+  @media (prefers-reduced-motion: reduce) { .ed-car-track { transition: none; } }
+  .ed-phone { display: block; width: 100%; height: auto; }
+  .ed-phones { display: grid; gap: 24px; align-items: center; }
+  .ed-phones-2 { grid-template-columns: minmax(0, 1fr) 280px 280px minmax(0, 1fr); }
+  .ed-phones-3 { grid-template-columns: repeat(3, minmax(0, 300px)); justify-content: center; }
+  .ed-phones-3n { grid-template-columns: minmax(0, 1fr) 240px 240px 240px minmax(0, 1fr); }
+  .ed-note { font-size: 15px; line-height: 1.55; color: #101010; margin: 0; }
+  .ed-note-r { text-align: right; }
+  @media (max-width: 1000px) { .ed-phones-2, .ed-phones-3n { grid-template-columns: 1fr 1fr; } .ed-phones-2 .ed-note, .ed-phones-3n .ed-note { grid-column: 1 / -1; text-align: left; } }
+  @media (max-width: 600px) { .ed-phones-2, .ed-phones-3, .ed-phones-3n { grid-template-columns: 1fr; } }
+  .ed-personas { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; margin-top: 36px; text-align: center; }
+  .ed-persona img { display: block; width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 0 auto 18px; }
+  .ed-persona h4 { font-size: 17px; font-weight: 700; margin: 0 0 8px; }
+  .ed-persona p { font-size: 15px; line-height: 1.55; color: #4a463d; margin: 0; }
+  @media (max-width: 900px) { .ed-personas { grid-template-columns: 1fr 1fr; } }
+  .ed-phones-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: start; }
+  .ed-perf { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 40px; align-items: start; }
+  .ed-perf-phones { display: block; }
+  @media (max-width: 900px) { .ed-perf { grid-template-columns: 1fr; } }
+  .ed-arrow { display: block; width: 110px; height: 55px; color: #101010; margin: 10px 0 0; }
+  .ed-note-r .ed-arrow { margin-left: auto; }
+  .ed-note .ed-arrow:first-child { margin: 0 0 10px; }
+  .ed-arrow-u { width: 48px; height: 56px; margin: 0 0 8px; transform: scaleY(-1); }
+  .ed-feats-cards > div { background: #F6F5F2; border-radius: 16px; padding: 24px; }
+  .ed-band-solid { background: #101010; }
+  .ed-band-solid::after { display: none; }
+  .ed-car-slide { flex: 0 0 100%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding: 0 56px; box-sizing: border-box; }
+  .ed-car-phones .ed-car-view { border-radius: 0; }
+  @media (max-width: 600px) { .ed-car-slide { grid-template-columns: 1fr; } }
+  .ed-annot { display: grid; grid-template-columns: minmax(0, 1fr) 250px 250px minmax(0, 1fr); gap: 20px; align-items: center; }
+  .ed-annot-3 { grid-template-columns: minmax(0, 1fr) 200px 200px 200px minmax(0, 1fr); }
+  .ed-annot-phone img { display: block; width: 100%; height: auto; }
+  .ed-annot-note p { font-size: 15px; line-height: 1.55; color: #101010; margin: 0; }
+  .ed-annot-left { text-align: right; align-self: center; }
+  .ed-annot-left .ed-arrow { margin: 8px 0 0 auto; }
+  .ed-annot-right { text-align: left; }
+  .ed-annot-right .ed-arrow { margin: 0 0 8px 0; }
+  .ed-annot-left { padding-bottom: 38%; }
+  .ed-annot .ed-annot-right { padding-bottom: 52%; }
+  .ed-annot-3 .ed-annot-left, .ed-annot-3 .ed-annot-right { padding-bottom: 0; }
+  @media (max-width: 1000px) { .ed-annot, .ed-annot-3 { grid-template-columns: 1fr 1fr; } .ed-annot-note { grid-column: 1 / -1; text-align: left; padding: 0 !important; } .ed-annot-note .ed-arrow { display: none; } }
+  .ed-phone, .ed-annot-phone img, .ed-car-slide img, .ed-side > img { background: #F6F5F2; border-radius: 18px; }
+  .ed-insights { max-width: 880px; }
+  .ed-insight { padding: 28px 0; border-top: 1px solid #ECEAE4; }
+  .ed-insight:first-child { border-top: none; padding-top: 0; }
+  .ed-insight h4 { font-family: 'Uncut Sans', 'Instrument Sans', sans-serif; font-size: 20px; font-weight: 600; letter-spacing: -.015em; line-height: 1.3; margin: 0 0 10px; }
+  .ed-insight p { font-size: 16px; line-height: 1.65; color: #4a463d; margin: 0; }
+  .ed-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 24px; text-align: center; }
+  .ed-stats .n { font-family: 'Uncut Sans', 'Instrument Sans', sans-serif; font-size: 34px; font-weight: 600; letter-spacing: -.02em; color: #101010; margin-bottom: 6px; }
+  .ed-stats p { font-size: 14.5px; }
+  @media (max-width: 700px) { .ed-stats { grid-template-columns: 1fr; } }
+  .ed-marquee { overflow: hidden; }
+  .ed-m-track { display: flex; gap: 32px; width: max-content; animation: ed-m 42s linear infinite; }
+  .ed-marquee:hover .ed-m-track { animation-play-state: paused; }
+  .ed-m-item { flex: 0 0 auto; width: calc((950px - 48px) / 4); max-width: 226px; }
+  .ed-m-item img { display: block; width: 100%; height: auto; }
+  @keyframes ed-m { from { transform: translateX(0); } to { transform: translateX(calc(-50% - 16px)); } }
+  @media (prefers-reduced-motion: reduce) { .ed-m-track { animation: none; } }
+  @media (max-width: 900px) { .ed-m-item { width: 40vw; } }
+  .ed-home-text { position: sticky; top: 120px; }
+  @media (max-width: 900px) { .ed-home-text { position: static; } }
+  .ed-take h4 { font-size: 18px; font-weight: 700; margin: 0 0 10px; }
+  .ed-take p { font-size: 16px; line-height: 1.65; color: #4a463d; margin: 0 0 28px; }
+  @media (max-width: 900px) { .ed-hmw, .ed-feats, .ed-row2, .ed-side { grid-template-columns: 1fr; } .ed-quote { font-size: 32px; } }
+</style>
+</head>
+<body>
+<div class="cs" style="font-family: 'Instrument Sans', system-ui, sans-serif; color: #101010; background: #FFFFFF; overflow-x: clip; font-size: 15px; line-height: 1.6">
+
+  <div style="background: #FFFFFF; padding: 20px 32px 56px; border-bottom: 1px solid #ECEAE4">
+    <nav style="max-width: 1136px; margin: 0 auto; background: #FFFFFF; border-radius: 999px; padding: 10px 14px 10px 22px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 14px rgba(16,16,16,.07)">
+      <a href="./" style="display: flex; align-items: center; gap: 10px">
+        <img src="./assets/logo.jpg" alt="Srotaswini" style="width: 30px; height: 30px; border-radius: 8px; object-fit: cover; display: block" />
+        <span style="font-family: 'Uncut Sans', 'Instrument Sans', sans-serif; font-size: 19px; letter-spacing: -.03em; font-weight: 600">Srotaswini</span>
+      </a>
+      <div style="display: flex; align-items: center; gap: 26px; font-size: 13px; font-weight: 500">
+        <a href="./#works" style="color: #F95C4B">Design projects</a>
+        <a href="./#works">AI projects</a>
+        <a href="./about.html">Know me</a>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px">
+        <a href="mailto:srotaswini.payal@gmail.com" title="Email" style="width: 32px; height: 32px; border-radius: 999px; background: #E3DBCC; display: grid; place-items: center; font-size: 13px">✉</a>
+        <a href="https://www.linkedin.com/in/srotaswini-sahoo-5a0549163/" title="LinkedIn" class="hv-orange" style="width: 32px; height: 32px; border-radius: 999px; background: #101010; color: #FFFFFF; display: grid; place-items: center; font-size: 12px; font-weight: 700">in</a>
+      </div>
+    </nav>
+
+    <div style="max-width: 1136px; margin: 56px auto 0">
+      <a href="./#works" style="font-size: 13px; font-weight: 600; color: #6f6959">← Back</a>
+      <h1 style="font-family: 'Uncut Sans', 'Instrument Sans', sans-serif; font-size: 38px; line-height: 1.12; letter-spacing: -.03em; margin: 22px 0 0; font-weight: 600; max-width: 760px; text-wrap: balance">Rethinking Parent's role in the ed-tech industry</h1>
+      <p class="cs-lead" style="margin-top: 18px">This project involved re-evaluating the role of parents, focusing on its relevance to them, and prioritising quick adaptation to critical situations, such as COVID-19.</p>
+      <div class="cs-meta" style="margin-top: 32px"><div class="cs-meta-cell"><div class="cs-meta-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 12h18"/></svg>Role</div><div class="cs-meta-value">UX Designer</div><div class="cs-meta-sub">Research, journeys, wireframes</div></div><div class="cs-meta-cell"><div class="cs-meta-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.5 2.9-6 6.5-6s6.5 2.5 6.5 6"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.5c3 0 5.5 2.2 5.5 5.5"/></svg>Team</div><div class="cs-meta-value">Me, Srijin (UI Designer)</div><div class="cs-meta-sub">Design Manager + PMs + Developers</div></div><div class="cs-meta-cell"><div class="cs-meta-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5.5a3 3 0 0 0 4 4l2-2-4-4-2 2z"/><path d="M13 7 4 16l4 4 9-9"/></svg>Tools</div><div class="cs-meta-value">Miro, Figma</div></div><div class="cs-meta-cell"><div class="cs-meta-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg>Focus</div><div class="cs-meta-value">Product design, Research</div><div class="cs-meta-sub">Edtech · Parent app</div></div></div>
+      <img src="./assets/edtech/cover-2400.jpg" srcset="./assets/edtech/cover-1200.jpg 1200w, ./assets/edtech/cover-2400.jpg 2400w" sizes="(max-width: 1200px) 100vw, 1136px" decoding="async" alt="BYJU’S Parent Zone app: notice board and study plan screens on two phones" style="width: 100%; height: auto; border-radius: 20px; margin-top: 36px; display: block" />
+      
+    </div>
+  </div>
+
+<div style="max-width: 1200px; margin: 0 auto; padding: 0 32px; display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 72px">
+    <aside style="position: sticky; top: 0; align-self: start; padding: 80px 0 32px; display: flex; flex-direction: column; gap: 2px; font-size: 13px; max-height: 100vh; overflow-y: auto; box-sizing: border-box">
+      <div style="font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: #8c8577; margin-bottom: 12px">On this page</div>
+      <a href="#brief" style="padding: 6px 0 6px 14px; border-left: 2px solid #101010; color: #101010; font-weight: 600; transition: color .15s, border-color .15s">Initial brief</a>
+      <a href="#process" style="padding: 6px 0 6px 14px; border-left: 2px solid #ECEAE4; color: #8c8577; font-weight: 500; transition: color .15s, border-color .15s">Design process</a>
+      <a href="#problem" style="padding: 6px 0 6px 14px; border-left: 2px solid #ECEAE4; color: #8c8577; font-weight: 500; transition: color .15s, border-color .15s">Problem statement</a>
+      <a href="#competitors" style="padding: 6px 0 6px 14px; border-left: 2px solid #ECEAE4; color: #8c8577; font-weight: 500; transition: color .15s, border-color .15s">Competitor analysis</a>
+      <a href="#research" style="padding: 6px 0 6px 14px; border-left: 2px solid #ECEAE4; color: #8c8577; font-weight: 500; transition: color .15s, border-color .15s">User research</a>
+      <a href="#solving" style="padding: 6px 0 6px 14px; border-left: 2px solid #ECEAE4; color: #8c8577; font-weight: 500; transition: color .15s, border-color .15s">What are we solving</a>
+      <a href="#experience" style="padding: 6px 0 6px 14px; border-left: 2px solid #ECEAE4; color: #8c8577; font-weight: 500; transition: color .15s, border-color .15s">Experience design</a>
+      <a href="#ia" style="padding: 6px 0 6px 14px; border-left: 2px solid #ECEAE4; color: #8c8577; font-weight: 500; transition: color .15s, border-color .15s">Information architecture</a>
+      <a href="#visual" style="padding: 6px 0 6px 14px; border-left: 2px solid #ECEAE4; color: #8c8577; font-weight: 500; transition: color .15s, border-color .15s">Visual design</a>
+      <a href="#takeaways" style="padding: 6px 0 6px 14px; border-left: 2px solid #ECEAE4; color: #8c8577; font-weight: 500; transition: color .15s, border-color .15s">My takeaways</a>
+    </aside>
+    <div style="min-width: 0">
+
+    <section id="brief" class="cs-section" style="padding-top: 72px">
+      <div class="cs-eyebrow">Initial brief</div>
+      <p class="cs-big">Design a dashboard interface that displays various parameters, including monthly progress reports, journey updates, and performance metrics, and how they are affecting the student's school marks. Parents should be able to see the rigour of the progress provided, as compared to a neighbourhood teacher.</p>
+      <ul class="cs-list" style="font-size: 16px; max-width: 820px">
+        <li>The dashboard should also show what activities the child is currently engaged in.</li>
+        <li>The benefits they receive from BYJU’S</li>
+        <li>Tasks they need to complete</li>
+        <li>And also feedback provided by tutors.</li>
+      </ul>
+      <div class="cs-eyebrow" style="margin-top: 72px">A little back story...</div>
+      <h3 class="cs-h3" style="font-size: 22px; margin-top: 10px">Re-Imagining Education Post Pandemic</h3>
+      <p class="cs-p" style="font-size: 16px; max-width: 880px">In early 2022, BYJU’S focused on parents as the shift to online learning tested all aspects of education. Instruction format, attendance, evaluation, technology, and human interaction were re-imagined, with some changes likely to last.</p>
+      <div class="cs-stack" style="margin-top: 28px">
+        <div class="cs-card" style="max-width: 880px">
+          <div class="cs-label" style="color: #8c8577">The problem</div>
+          <h4 style="font-size: 18px; font-weight: 700; margin: 0 0 10px">Why did BYJU’S reconsider the parents’ role??? 🧐</h4>
+          <p class="cs-p" style="font-size: 16px; margin: 0">The data showed a significant decline in tier 2 and tier 3 cities as education shifted online due to lack of awareness and trust. Teachers struggled to gauge student comprehension, and parents doubted the quality of online education.</p>
+        </div>
+        <div class="cs-card" style="max-width: 880px">
+          <div class="cs-label" style="color: #8c8577">The goal</div>
+          <p style="font-size: 18px; font-weight: 700; line-height: 1.45; margin: 0 0 14px; color: #101010">So, the vision shifted!! The new goal was to enhance the experience of parents, as they are the ultimate decision makers. We need to be answerable to parents!! 😎</p>
+          <p class="cs-p" style="font-size: 16px; margin-bottom: 8px">Some important KPIs are as below</p>
+          <ul class="cs-list" style="font-size: 16px">
+            <li>Building trust by making the journey transparent and intuitive.</li>
+            <li>Student retention rate improvement.</li>
+            <li>Simplifying parent-tutor communication to make them feel empowered.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="process" class="cs-section">
+      <div class="cs-eyebrow">Design process</div>
+      <p class="cs-big">The process we followed as a team for a better outcome:</p>
+      <ol style="margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 8px; font-size: 17px; line-height: 1.6; color: #101010; max-width: 820px">
+        <li>Requirement gathering</li>
+        <li>Competitor analysis</li>
+        <li>User interviews</li>
+        <li>Analyse research &amp; analytics to obtain insights</li>
+        <li>Convert our insights to design concepts</li>
+        <li>Finalise the features &amp; discuss mocks</li>
+        <li>Usability Testing with Prototypes</li>
+      </ol>
+      <div class="cs-card" style="margin-top: 36px; max-width: 820px">
+        <h3 class="cs-h3">Timeframe</h3>
+        <p class="cs-p">The project was initially planned for two months before we decided to extend it to three months.</p>
+        <p class="cs-p" style="margin-bottom: 6px">Conducted:</p>
+        <ul class="cs-list" style="list-style: none; padding-left: 0">
+          <li>— Requirement gathering: 3 days</li>
+          <li>— User research &amp; competitor analysis: 2 weeks</li>
+          <li>— Feature prioritisation: 1 week</li>
+          <li>— IA/task flow: 3 days</li>
+          <li>— Wireframes: 1 week for mobile &amp; 1 week for tablet</li>
+          <li>— UI: 2 weeks for mobile &amp; 2 weeks for tablet</li>
+          <li>— User testing: 1 week</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="problem" class="cs-section">
+      <div class="cs-eyebrow">Understanding the problem statement</div>
+      <p class="cs-big">The initial step was to identify the important questions that hindered parents from effectively monitoring their child's progress, accessing relevant educational resources, communicating with teachers, and participating actively in their child's learning experience.</p>
+      <figure class="pn" style="margin-top: 24px"><img src="./assets/edtech/problem-2400.jpg" srcset="./assets/edtech/problem-1200.jpg 1200w, ./assets/edtech/problem-2400.jpg 2400w" sizes="(max-width: 1200px) 100vw, 950px" alt="What are we trying to solve" /></figure>
+    </section>
+
+    <section id="competitors" class="cs-section">
+      <div class="cs-eyebrow">Competitor analysis</div>
+      <p class="cs-big" style="margin-bottom: 10px">Going through competitors’ websites</p>
+      <p class="cs-p" style="font-size: 16px; margin-bottom: 6px">Focus:</p>
+      <ul class="cs-list" style="list-style: none; padding-left: 0; font-size: 16px">
+        <li>— How they communicate with the target users</li>
+        <li>— What features they focus on</li>
+        <li>— Visual communication</li>
+        <li>— What are the concerns of potential customers</li>
+        <li>— What features they mainly focus on</li>
+      </ul>
+      <p style="font-family: 'Uncut Sans', 'Instrument Sans', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: -.015em; line-height: 1.35; margin: 36px 0 12px; max-width: 820px">Direct competitors are Khan Academy, Extramarks, Toddle and Mindspark.</p>
+      <p class="cs-p" style="font-size: 16px; max-width: 880px">Competitors seemed to be oriented in the same way. Most of them haven’t provided much value to parents; everyone was very focused on the child. Looking at the market provided me with some interesting insights, but also revealed some drawbacks.</p>
+      <figure class="pn" style="margin-top: 28px"><img src="./assets/edtech/competitors-2400.jpg" srcset="./assets/edtech/competitors-1200.jpg 1200w, ./assets/edtech/competitors-2400.jpg 2400w" sizes="(max-width: 1200px) 100vw, 950px" alt="Competitor analysis of Khan Academy, Extramarks, Toddle and Mindspark" /></figure>
+    </section>
+
+    <section id="research" class="cs-section">
+      <div class="cs-eyebrow">User research</div>
+      <p class="cs-big">We began by identifying our potential users. The target demographic is people in the 30 to 50 age range from tier 2 and tier 3 cities of India. In the initial phase, we were trying to understand the user's issues in terms of what the parents are specifically looking to learn about their children and why they are not feeling confident regarding online education.</p>
+      <div class="cs-eyebrow" style="margin-top: 64px">Defining the user types</div><p class="cs-big" style="font-size: 20px">In this phase, we aimed to understand various user segments and their lifestyles. We explored where our solution could fit into their lives, assessing whether they perceive it as a valuable solution or just another additional task.</p><div class="ed-personas"><div class="ed-persona"><img src="./assets/edtech/persona-1054-660.jpg" srcset="./assets/edtech/persona-1054-330.jpg 330w, ./assets/edtech/persona-1054-660.jpg 660w" sizes="200px" alt="Concerned parent" /><h4>Concerned Parents</h4><p>Parents who are always concerned about their child's progress.</p></div><div class="ed-persona"><img src="./assets/edtech/persona-1055-660.jpg" srcset="./assets/edtech/persona-1055-330.jpg 330w, ./assets/edtech/persona-1055-660.jpg 660w" sizes="200px" alt="Busy working parent" /><h4>Busy Working Parents</h4><p>Parents who do not have much time to concentrate on their child's academics and want quick updates on every activity.</p></div><div class="ed-persona"><img src="./assets/edtech/persona-1056-660.jpg" srcset="./assets/edtech/persona-1056-330.jpg 330w, ./assets/edtech/persona-1056-660.jpg 660w" sizes="200px" alt="Enthusiastic parent" /><h4>Enthusiastic Parents</h4><p>Parents who are interested in supplementing their child's traditional education with additional learning resources and tools.</p></div><div class="ed-persona"><img src="./assets/edtech/persona-1057-660.jpg" srcset="./assets/edtech/persona-1057-330.jpg 330w, ./assets/edtech/persona-1057-660.jpg 660w" sizes="200px" alt="Helicopter parent" /><h4>Helicopter Parents</h4><p>A helicopter parent is a parent who pays extremely close attention to a child's experiences and problems, particularly at educational institutions.</p></div></div>
+
+      <div class="ed-band" style="margin-top: 56px">
+        <img src="./assets/edtech/quote-bg-2400.jpg" alt="" />
+        <div><p class="ed-quote">"Parents are edTech’s<br />Next Big Users"</p></div>
+      </div>
+
+      <h3 style="font-family: 'Uncut Sans', 'Instrument Sans', sans-serif; font-size: 28px; font-weight: 600; letter-spacing: -.02em; line-height: 1.2; margin: 72px 0 24px">Key Insights from research</h3><div class="ed-insights"><div class="ed-insight"><h4>Recognising the Need for Parental Involvement:</h4><p>Research revealed a strong need to involve parents in edtech, as many are becoming at-home educators and potential users of educational technology.</p><div class="ed-stats"><div><div class="n">64%</div><p>of parents acknowledge that tech integration has transformed the way of learning!</p></div><div><div class="n">78%</div><p>take EdTech as a medium that is the best choice for practical learning and effective results.</p></div><div><div class="n">88%</div><p>have noticed that their child is performing great in complex subjects with the help of EdTech.</p></div></div></div><div class="ed-insight"><h4>Need for an Easy-to-Use Platform:</h4><p>In tier 2 and 3 cities, there's a lack of parental involvement and trust in digital education. Parents in tier 1, with their busy lifestyles, need a simple platform to quickly access their child’s educational data.</p></div><div class="ed-insight"><h4>Interest in Interactive Learning:</h4><p>Parents are interested in more than just subject marks; they value interactive and experiential learning that also focuses on behavioural development, and the good news is that BYJU’S was already doing this.</p></div><div class="ed-insight"><h4>Trust in Online Education with Human Interventions:</h4><p>Parents want to be informed about their child's performance, class attendance, and progress. They need assurance that the edtech platform is effective, often requiring human interventions to build trust.</p></div><div class="ed-insight"><h4>Desire for Better Communication:</h4><p>Parents seek better ways to communicate in this digital world. They want to feel part of their child's educational journey and have a say in it. Providing platforms for feedback and active engagement can make parents feel more involved and valued.</p></div></div>
+
+      <div class="cs-eyebrow" style="margin-top: 72px">Common pain points</div>
+      <p class="cs-big">A few highlights from our user interviews</p>
+      <div class="ed-car" style="margin-top: 20px"><div class="ed-car-view"><div class="ed-car-track"><img src="./assets/edtech/pain1-2400.jpg" srcset="./assets/edtech/pain1-1200.jpg 1200w, ./assets/edtech/pain1-2400.jpg 2400w" sizes="(max-width: 1200px) 100vw, 950px" alt="User interview highlight: “I want to be a part of my child’s learning journey so that I can monitor him and understand his shortcomings” Nishita Mishra, 38" /><img src="./assets/edtech/pain2-2400.jpg" srcset="./assets/edtech/pain2-1200.jpg 1200w, ./assets/edtech/pain2-2400.jpg 2400w" sizes="(max-width: 1200px) 100vw, 950px" alt="User interview highlight: “Where my child is standing among his friends and what kind of feedback he is getting?” Mamata Roy, 41" /><img src="./assets/edtech/pain3-2400.jpg" srcset="./assets/edtech/pain3-1200.jpg 1200w, ./assets/edtech/pain3-2400.jpg 2400w" sizes="(max-width: 1200px) 100vw, 950px" alt="User interview highlight: “I want to know how BYJU’S is helping my child to achieve her goals?” Saket Ranjan, 40" /></div><button type="button" class="ed-car-btn ed-car-prev" aria-label="Previous quote">‹</button><button type="button" class="ed-car-btn ed-car-next" aria-label="Next quote">›</button></div><div class="ed-car-dots"><button type="button" aria-label="Quote 1"></button><button type="button" aria-label="Quote 2"></button><button type="button" aria-label="Quote 3"></button></div></div>
+    </section>
+
+    <section id="solving" class="cs-section">
+      <div class="cs-eyebrow">So, what are we solving?</div>
+      <div class="ed-hmw" style="margin-top: 24px">
+        <div><div class="n">01</div><p>How might we demonstrate the effectiveness of BYJU’S, compared to local tuition centres by showing tangible improvements in students' scores?</p></div>
+        <div><div class="n">02</div><p>How might we create a direct and accessible communication channel between parents and tutors, and provide personalised attention to each student?</p></div>
+        <div><div class="n">03</div><p>How might we provide parents with real-time updates on their child's progress and activities at BYJU’S to ensure they feel informed?</p></div>
+      </div>
+      <div class="ed-band ed-band-solid" style="margin-top: 48px; padding: 64px 48px">
+        <div>
+          <div class="cs-eyebrow" style="color: #FFFFFF; opacity: .85">Refined problem statement</div>
+          <p style="font-family: 'Uncut Sans', 'Instrument Sans', sans-serif; font-size: 26px; line-height: 1.35; letter-spacing: -.015em; font-weight: 600; margin: 16px 0 0; max-width: 880px">Parents need a comprehensive digital platform that provides them with detailed insights and fosters active engagement in their child's education. This platform should enable parents to track their child's progress, understand their learning patterns, and feel assured of the effectiveness of the educational technology, ultimately making them valued partners in their child's learning journey.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="cs-section">
+      <div class="cs-eyebrow">Experience design</div>
+      <p class="cs-big">After identifying the pain points, we started ideating about the structure of the app and how to address the questions and concerns of parents, including which parameters to consider, what information parents expect to know, and when and how we should update them on the whereabouts of their child.</p>
+      <div class="pn-stack" style="margin-top: 24px">
+        <figure class="pn"><img src="./assets/edtech/experience-2400.jpg" srcset="./assets/edtech/experience-1200.jpg 1200w, ./assets/edtech/experience-2400.jpg 2400w" sizes="(max-width: 1200px) 100vw, 950px" alt="Experience design" /></figure>
+        <figure class="pn"><img src="./assets/edtech/journey-2400.jpg" srcset="./assets/edtech/journey-1200.jpg 1200w, ./assets/edtech/journey-2400.jpg 2400w" sizes="(max-width: 1200px) 100vw, 950px" alt="Parent journey" /></figure>
+      </div>
+
+      <div class="cs-eyebrow" style="margin-top: 72px">Features for MVP version</div>
+      <div class="ed-feats ed-feats-cards">
+        <div><h4>Notice Board</h4><p>To give the appearance of a physical notice board informing them of their child's whereabouts, as well as the information that requires parental involvement.</p></div>
+        <div><h4>Performance dashboard</h4><p>One widget will be on the home page for a quick view of performance, and there will also be a dedicated page for all the detailed views where parents can see various metrics such as average test score, average time spent, topics learned/revised, teacher feedback, and class rank.</p></div>
+        <div><h4>Study plan</h4><p>Parents can view their child's personalised study plan, which was created based on their child's strengths and weaknesses. Classes, homework, and self-study materials for each subject were designed to focus on the child's ability and areas for improvement.</p></div>
+        <div><h4>Help Centre</h4><p>The help centre allows parents to quickly find solutions to various issues through a 24/7 chatbot. To provide user-centric assistance, FAQs and queries are customised based on the cohort and user profile.</p></div>
+        <div><h4>Know our programme</h4><p>A quick guide to help the parents with the different features of Parent Zone. Description of various products/initiatives by BYJU’S. Also special highlights about any new feature.</p></div>
+        <div><h4>Study bites</h4><p>Parents can see their child's small achievements in their daily activities, in image or PDF format.</p></div>
+      </div>
+    </section>
+
+    <section id="ia" class="cs-section">
+      <div class="cs-split" style="grid-template-columns: 260px minmax(0, 1fr); margin-top: 0">
+        <h2 style="font-family: 'Uncut Sans', 'Instrument Sans', sans-serif; font-size: 28px; font-weight: 600; letter-spacing: -.02em; line-height: 1.2; margin: 0">Information architecture</h2>
+        <p class="cs-p" style="font-size: 16px">We started by creating the IA for version 1, and then we cut a few features after consulting with the product manager and tech team. Then we created the final IA for our MVP version. We wanted to make it as simple as possible for the user because we were targeting tier 2 and tier 3 cities.</p>
+      </div>
+      <figure class="pn" style="margin-top: 32px"><a href="./assets/edtech/ia-full.jpg"><img src="./assets/edtech/ia-2400.jpg" srcset="./assets/edtech/ia-1200.jpg 1200w, ./assets/edtech/ia-2400.jpg 2400w" sizes="(max-width: 1200px) 100vw, 950px" alt="Information architecture for the MVP" /></a><figcaption>Click to open full size</figcaption></figure>
+    </section>
+
+    <section id="visual" class="cs-section">
+      <div class="cs-split" style="grid-template-columns: 260px minmax(0, 1fr); margin-top: 0">
+        <h2 style="font-family: 'Uncut Sans', 'Instrument Sans', sans-serif; font-size: 28px; font-weight: 600; letter-spacing: -.02em; line-height: 1.2; margin: 0">Visual Design</h2>
+        <p class="cs-p" style="font-size: 16px">For visual design, we used BYJU’S Design Library, supplemented by custom elements whenever we needed to create something specific to our case.</p>
+      </div>
+
+      <div class="ed-side ed-home" style="margin-top: 96px; grid-template-columns: minmax(0, 1fr) 330px; gap: 56px; padding-right: 110px; align-items: start">
+        <div class="ed-home-text">
+          <div class="cs-eyebrow">Home page</div>
+          <p class="cs-big" style="font-size: 20px; max-width: 380px">All the crucial data on children that parents require will be available on the home page. Quickly understandable information so that parents won't need to spend a lot of time on the app.</p>
+        </div>
+        <img src="./assets/edtech/home-mobile-800.jpg" srcset="./assets/edtech/home-mobile-400.jpg 400w, ./assets/edtech/home-mobile-800.jpg 800w" sizes="320px" alt="Home page of the parent app on mobile, full length" style="display: block; width: 100%; height: auto" />
+      </div>
+      <figure class="pn" style="margin-top: 120px"><img src="./assets/edtech/vd-overview-2400.jpg" srcset="./assets/edtech/vd-overview-1200.jpg 1200w, ./assets/edtech/vd-overview-2400.jpg 2400w" sizes="(max-width: 1200px) 100vw, 950px" alt="Home page: tap on any subject to have a more detailed view of that subject; select the profile dropdown to switch between your children’s profiles" /></figure>
+
+      <div class="ed-perf" style="margin-top: 72px"><div><div class="cs-eyebrow">Performance</div><p class="cs-p" style="font-size: 16px; margin-top: 14px">Status of their child's performance, as well as their class and pan-India rank, will be displayed. All performance metrics such as test scores, time spent, topics mastered in each subject, and weak topics will be highlighted, along with their teacher’s feedback.</p></div><div class="ed-perf-phones"><figure class="pn" style="margin:0"><img src="./assets/edtech/vd-performance-2400.jpg" srcset="./assets/edtech/vd-performance-1200.jpg 1200w, ./assets/edtech/vd-performance-2400.jpg 2400w" sizes="(max-width: 900px) 100vw, 660px" alt="Performance: test score with class and All India rank, leaderboard with in-class and homework overview, self study overview with tutor feedback" /></figure></div></div>
+
+      <figure class="pn" style="margin-top: 120px"><img src="./assets/edtech/vd-monthly-2400.jpg" srcset="./assets/edtech/vd-monthly-1200.jpg 1200w, ./assets/edtech/vd-monthly-2400.jpg 2400w" sizes="(max-width: 1200px) 100vw, 950px" alt="Monthly comparison view lets parents see their child’s progress and compare school and BYJU’S marks; parents can download their child’s report card PDF and have a detailed view" /></figure>
+
+      <div class="cs-eyebrow" style="margin-top: 128px">Subjectwise performance view</div>
+      <div class="ed-phones ed-phones-4" style="margin-top: 24px"><img src="./assets/edtech/ph-sub3-900.jpg" srcset="./assets/edtech/ph-sub3-450.jpg 450w, ./assets/edtech/ph-sub3-900.jpg 900w" sizes="(max-width: 900px) 45vw, 220px" alt="Physics selected: Priya’s test score 58% average, view monthly graph, download report card, Physics leaderboard" class="ed-phone" /><img src="./assets/edtech/ph-sub7-900.jpg" srcset="./assets/edtech/ph-sub7-450.jpg 450w, ./assets/edtech/ph-sub7-900.jpg 900w" sizes="(max-width: 900px) 45vw, 220px" alt="Physics leaderboard with Priya Jain second at 85%; Physics mastery: 82% course completion, 15 of 20 topics mastered, mastered topics" class="ed-phone" /><img src="./assets/edtech/ph-sub4-900.jpg" srcset="./assets/edtech/ph-sub4-450.jpg 450w, ./assets/edtech/ph-sub4-900.jpg 900w" sizes="(max-width: 900px) 45vw, 220px" alt="Mastered topics with 92% scores; 5 weak topics found: Rational Numbers, Linear Equation in One Variable; Physics self study overview" class="ed-phone" /><img src="./assets/edtech/ph-sub5-900.jpg" srcset="./assets/edtech/ph-sub5-450.jpg 450w, ./assets/edtech/ph-sub5-900.jpg 900w" sizes="(max-width: 900px) 45vw, 220px" alt="Physics self study overview: 2h 15m average time spent, 12 topics learned, 14 videos watched, 3 chapters practised, 11 chapters revised; feedback from Rakesh Shah, Physics tutor" class="ed-phone" /></div>
+
+      <div class="cs-eyebrow" style="margin-top: 128px">Study plan</div>
+      <p class="cs-p" style="font-size: 16px; max-width: 880px">Parents can view and download their child's individualised study plan. They can see the status of each task's completion. They can also toggle between daily, weekly, and monthly views to see what classes, homework, and self-study materials their child has received.</p>
+      <div class="ed-marquee" style="margin-top: 24px" aria-label="Study plan screens, scrolling"><div class="ed-m-track"><div class="ed-m-item"><img src="./assets/edtech/sp-classes-daily-900.jpg" srcset="./assets/edtech/sp-classes-daily-450.jpg 450w, ./assets/edtech/sp-classes-daily-900.jpg 900w" sizes="(max-width: 900px) 45vw, 300px" alt="Study plan, daily view: classes expanded, Mathematics, Understanding quadrilaterals, 7:00 to 8:00 PM at centre, with preparatory material" class="ed-phone" /></div><div class="ed-m-item"><img src="./assets/edtech/sp-homework-daily-900.jpg" srcset="./assets/edtech/sp-homework-daily-450.jpg 450w, ./assets/edtech/sp-homework-daily-900.jpg 900w" sizes="(max-width: 900px) 45vw, 300px" alt="Study plan, daily view: homework expanded, Quadrilaterals worksheet completed, Electrochemistry due today, Laws of gravity practice paper due today" class="ed-phone" /></div><div class="ed-m-item"><img src="./assets/edtech/sp-selfstudy-daily-900.jpg" srcset="./assets/edtech/sp-selfstudy-daily-450.jpg 450w, ./assets/edtech/sp-selfstudy-daily-900.jpg 900w" sizes="(max-width: 900px) 45vw, 300px" alt="Study plan, daily view: self study material expanded, Quadrilaterals video completed, Electrochemistry journey due today, Introduction to tissues video" class="ed-phone" /></div><div class="ed-m-item"><img src="./assets/edtech/sp-weekly-900.jpg" srcset="./assets/edtech/sp-weekly-450.jpg 450w, ./assets/edtech/sp-weekly-900.jpg 900w" sizes="(max-width: 900px) 45vw, 300px" alt="Study plan, weekly view: 22 to 28 June, this week’s study plan 40% completion, Monday classes" class="ed-phone" /></div><div class="ed-m-item"><img src="./assets/edtech/sp-monthly-900.jpg" srcset="./assets/edtech/sp-monthly-450.jpg 450w, ./assets/edtech/sp-monthly-900.jpg 900w" sizes="(max-width: 900px) 45vw, 300px" alt="Study plan, monthly view: June 2022, June’s study plan 75% completion, first week classes" class="ed-phone" /></div><div class="ed-m-item"><img src="./assets/edtech/sp-monthly-details-900.jpg" srcset="./assets/edtech/sp-monthly-details-450.jpg 450w, ./assets/edtech/sp-monthly-details-900.jpg 900w" sizes="(max-width: 900px) 45vw, 300px" alt="Study plan, weekly details: 1st week 01 to 07 June, classes, homework and self study material per day" class="ed-phone" /></div><div class="ed-m-item"><img src="./assets/edtech/sp-classes-daily-900.jpg" srcset="./assets/edtech/sp-classes-daily-450.jpg 450w, ./assets/edtech/sp-classes-daily-900.jpg 900w" sizes="(max-width: 900px) 45vw, 300px" alt="Study plan, daily view: classes expanded, Mathematics, Understanding quadrilaterals, 7:00 to 8:00 PM at centre, with preparatory material" class="ed-phone" /></div><div class="ed-m-item"><img src="./assets/edtech/sp-homework-daily-900.jpg" srcset="./assets/edtech/sp-homework-daily-450.jpg 450w, ./assets/edtech/sp-homework-daily-900.jpg 900w" sizes="(max-width: 900px) 45vw, 300px" alt="Study plan, daily view: homework expanded, Quadrilaterals worksheet completed, Electrochemistry due today, Laws of gravity practice paper due today" class="ed-phone" /></div><div class="ed-m-item"><img src="./assets/edtech/sp-selfstudy-daily-900.jpg" srcset="./assets/edtech/sp-selfstudy-daily-450.jpg 450w, ./assets/edtech/sp-selfstudy-daily-900.jpg 900w" sizes="(max-width: 900px) 45vw, 300px" alt="Study plan, daily view: self study material expanded, Quadrilaterals video completed, Electrochemistry journey due today, Introduction to tissues video" class="ed-phone" /></div><div class="ed-m-item"><img src="./assets/edtech/sp-weekly-900.jpg" srcset="./assets/edtech/sp-weekly-450.jpg 450w, ./assets/edtech/sp-weekly-900.jpg 900w" sizes="(max-width: 900px) 45vw, 300px" alt="Study plan, weekly view: 22 to 28 June, this week’s study plan 40% completion, Monday classes" class="ed-phone" /></div><div class="ed-m-item"><img src="./assets/edtech/sp-monthly-900.jpg" srcset="./assets/edtech/sp-monthly-450.jpg 450w, ./assets/edtech/sp-monthly-900.jpg 900w" sizes="(max-width: 900px) 45vw, 300px" alt="Study plan, monthly view: June 2022, June’s study plan 75% completion, first week classes" class="ed-phone" /></div><div class="ed-m-item"><img src="./assets/edtech/sp-monthly-details-900.jpg" srcset="./assets/edtech/sp-monthly-details-450.jpg 450w, ./assets/edtech/sp-monthly-details-900.jpg 900w" sizes="(max-width: 900px) 45vw, 300px" alt="Study plan, weekly details: 1st week 01 to 07 June, classes, homework and self study material per day" class="ed-phone" /></div></div></div>
+
+      <div class="cs-eyebrow" style="margin-top: 128px">Help centre</div>
+      <p class="cs-p" style="font-size: 16px; max-width: 880px">We have created a comprehensive help centre for parents, where they can easily find answers to any questions. There is no need to call an agent, as they can find solutions to problems across all categories directly within the help centre.</p>
+      <div class="ed-marquee" style="margin-top: 24px" aria-label="Help centre screens, scrolling"><div class="ed-m-track"><div class="ed-m-item"><img src="./assets/edtech/hc-home-900.jpg" srcset="./assets/edtech/hc-home-450.jpg 450w, ./assets/edtech/hc-home-900.jpg 900w" sizes="226px" alt="Help and support home: Hi Priya, how can we help you? with My chats, My issues and recommended queries" /></div><div class="ed-m-item"><img src="./assets/edtech/hc-faq-900.jpg" srcset="./assets/edtech/hc-faq-450.jpg 450w, ./assets/edtech/hc-faq-900.jpg 900w" sizes="226px" alt="Recommended query expanded: Issue with tablet, with a how-to video and Was this article helpful?" /></div><div class="ed-m-item"><img src="./assets/edtech/hc-video-900.jpg" srcset="./assets/edtech/hc-video-450.jpg 450w, ./assets/edtech/hc-video-900.jpg 900w" sizes="226px" alt="How to guide for your tablet video playing in a sheet" /></div><div class="ed-m-item"><img src="./assets/edtech/hc-topics-900.jpg" srcset="./assets/edtech/hc-topics-450.jpg 450w, ./assets/edtech/hc-topics-900.jpg 900w" sizes="226px" alt="Help topics: my class, my programme, profile details, order delivery, payments and refunds, technical issues; Speak to us" /></div><div class="ed-m-item"><img src="./assets/edtech/hc-chat-900.jpg" srcset="./assets/edtech/hc-chat-450.jpg 450w, ./assets/edtech/hc-chat-900.jpg 900w" sizes="226px" alt="Help centre chatbot: issue with my order, payment received, expected arrival and track order" /></div><div class="ed-m-item"><img src="./assets/edtech/hc-chats-900.jpg" srcset="./assets/edtech/hc-chats-450.jpg 450w, ./assets/edtech/hc-chats-900.jpg 900w" sizes="226px" alt="My chats: active and past conversations" /></div><div class="ed-m-item"><img src="./assets/edtech/hc-filter-900.jpg" srcset="./assets/edtech/hc-filter-450.jpg 450w, ./assets/edtech/hc-filter-900.jpg 900w" sizes="226px" alt="My chats filter by status and category" /></div><div class="ed-m-item"><img src="./assets/edtech/hc-language-900.jpg" srcset="./assets/edtech/hc-language-450.jpg 450w, ./assets/edtech/hc-language-900.jpg 900w" sizes="226px" alt="Choose your preferred language: English, Hindi, Kannada, Marathi, Malayalam, Tamil, Telugu, Urdu" /></div><div class="ed-m-item"><img src="./assets/edtech/hc-home-900.jpg" srcset="./assets/edtech/hc-home-450.jpg 450w, ./assets/edtech/hc-home-900.jpg 900w" sizes="226px" alt="Help and support home: Hi Priya, how can we help you? with My chats, My issues and recommended queries" /></div><div class="ed-m-item"><img src="./assets/edtech/hc-faq-900.jpg" srcset="./assets/edtech/hc-faq-450.jpg 450w, ./assets/edtech/hc-faq-900.jpg 900w" sizes="226px" alt="Recommended query expanded: Issue with tablet, with a how-to video and Was this article helpful?" /></div><div class="ed-m-item"><img src="./assets/edtech/hc-video-900.jpg" srcset="./assets/edtech/hc-video-450.jpg 450w, ./assets/edtech/hc-video-900.jpg 900w" sizes="226px" alt="How to guide for your tablet video playing in a sheet" /></div><div class="ed-m-item"><img src="./assets/edtech/hc-topics-900.jpg" srcset="./assets/edtech/hc-topics-450.jpg 450w, ./assets/edtech/hc-topics-900.jpg 900w" sizes="226px" alt="Help topics: my class, my programme, profile details, order delivery, payments and refunds, technical issues; Speak to us" /></div><div class="ed-m-item"><img src="./assets/edtech/hc-chat-900.jpg" srcset="./assets/edtech/hc-chat-450.jpg 450w, ./assets/edtech/hc-chat-900.jpg 900w" sizes="226px" alt="Help centre chatbot: issue with my order, payment received, expected arrival and track order" /></div><div class="ed-m-item"><img src="./assets/edtech/hc-chats-900.jpg" srcset="./assets/edtech/hc-chats-450.jpg 450w, ./assets/edtech/hc-chats-900.jpg 900w" sizes="226px" alt="My chats: active and past conversations" /></div><div class="ed-m-item"><img src="./assets/edtech/hc-filter-900.jpg" srcset="./assets/edtech/hc-filter-450.jpg 450w, ./assets/edtech/hc-filter-900.jpg 900w" sizes="226px" alt="My chats filter by status and category" /></div><div class="ed-m-item"><img src="./assets/edtech/hc-language-900.jpg" srcset="./assets/edtech/hc-language-450.jpg 450w, ./assets/edtech/hc-language-900.jpg 900w" sizes="226px" alt="Choose your preferred language: English, Hindi, Kannada, Marathi, Malayalam, Tamil, Telugu, Urdu" /></div></div></div>
+
+      <div class="cs-eyebrow" style="margin-top: 128px">Parental control</div>
+      <p class="cs-p" style="font-size: 16px; max-width: 880px">Parents can regulate how they want their child to spend their time on the device, by setting up limits for individual apps. Parents can uninstall or hide particular apps, and block websites by simply entering their URLs.</p>
+      <div class="ed-marquee" style="margin-top: 24px" aria-label="Parental control screens, scrolling"><div class="ed-m-track"><div class="ed-m-item"><img src="./assets/edtech/pc-usage-900.jpg" srcset="./assets/edtech/pc-usage-450.jpg 450w, ./assets/edtech/pc-usage-900.jpg 900w" sizes="226px" alt="Device control, app usage: weekly daily average 5h 30m, learning, productivity and entertainment breakdown, most used apps" /></div><div class="ed-m-item"><img src="./assets/edtech/pc-controls-900.jpg" srcset="./assets/edtech/pc-controls-450.jpg 450w, ./assets/edtech/pc-controls-900.jpg 900w" sizes="226px" alt="Device control, app controls: all apps with time used, set limit and toggle for Notion, Miro, BYJU’S, Duolingo, Netflix, WhatsApp, Among Us" /></div><div class="ed-m-item"><img src="./assets/edtech/pc-dropdown-900.jpg" srcset="./assets/edtech/pc-dropdown-450.jpg 450w, ./assets/edtech/pc-dropdown-900.jpg 900w" sizes="226px" alt="Device control, app controls: uninstall or hide menu on an app" /></div><div class="ed-m-item"><img src="./assets/edtech/pc-limit-900.jpg" srcset="./assets/edtech/pc-limit-450.jpg 450w, ./assets/edtech/pc-limit-900.jpg 900w" sizes="226px" alt="Device control: set daily time limit for Notion, 2 hours 30 minutes" /></div><div class="ed-m-item"><img src="./assets/edtech/pc-websites-900.jpg" srcset="./assets/edtech/pc-websites-450.jpg 450w, ./assets/edtech/pc-websites-900.jpg 900w" sizes="226px" alt="Device control, websites: allow access to all websites, blocked websites youtube.com and netflix.com" /></div><div class="ed-m-item"><img src="./assets/edtech/pc-playstore-900.jpg" srcset="./assets/edtech/pc-playstore-450.jpg 450w, ./assets/edtech/pc-playstore-900.jpg 900w" sizes="226px" alt="Device control, Play Store: allow access to all Play Store apps, blocked apps Netflix" /></div><div class="ed-m-item"><img src="./assets/edtech/pc-usage-900.jpg" srcset="./assets/edtech/pc-usage-450.jpg 450w, ./assets/edtech/pc-usage-900.jpg 900w" sizes="226px" alt="Device control, app usage: weekly daily average 5h 30m, learning, productivity and entertainment breakdown, most used apps" /></div><div class="ed-m-item"><img src="./assets/edtech/pc-controls-900.jpg" srcset="./assets/edtech/pc-controls-450.jpg 450w, ./assets/edtech/pc-controls-900.jpg 900w" sizes="226px" alt="Device control, app controls: all apps with time used, set limit and toggle for Notion, Miro, BYJU’S, Duolingo, Netflix, WhatsApp, Among Us" /></div><div class="ed-m-item"><img src="./assets/edtech/pc-dropdown-900.jpg" srcset="./assets/edtech/pc-dropdown-450.jpg 450w, ./assets/edtech/pc-dropdown-900.jpg 900w" sizes="226px" alt="Device control, app controls: uninstall or hide menu on an app" /></div><div class="ed-m-item"><img src="./assets/edtech/pc-limit-900.jpg" srcset="./assets/edtech/pc-limit-450.jpg 450w, ./assets/edtech/pc-limit-900.jpg 900w" sizes="226px" alt="Device control: set daily time limit for Notion, 2 hours 30 minutes" /></div><div class="ed-m-item"><img src="./assets/edtech/pc-websites-900.jpg" srcset="./assets/edtech/pc-websites-450.jpg 450w, ./assets/edtech/pc-websites-900.jpg 900w" sizes="226px" alt="Device control, websites: allow access to all websites, blocked websites youtube.com and netflix.com" /></div><div class="ed-m-item"><img src="./assets/edtech/pc-playstore-900.jpg" srcset="./assets/edtech/pc-playstore-450.jpg 450w, ./assets/edtech/pc-playstore-900.jpg 900w" sizes="226px" alt="Device control, Play Store: allow access to all Play Store apps, blocked apps Netflix" /></div></div></div>
+    </section>
+
+    <section id="takeaways" class="cs-section" style="padding-bottom: 96px">
+      <div class="cs-split" style="grid-template-columns: 260px minmax(0, 1fr); margin-top: 0">
+        <h2 style="font-family: 'Uncut Sans', 'Instrument Sans', sans-serif; font-size: 28px; font-weight: 600; letter-spacing: -.02em; line-height: 1.2; margin: 0">My takeaways</h2>
+        <div class="ed-take">
+          <h4>- Identify the user's real problem</h4>
+          <p>The BYJU’S team came to us with a Product Requirements Document that listed all the features they wanted. Before they had decided their target audience, they had already planned what the app would require. My team and I did our best to communicate the importance of research and insights in order to inform product decisions and were able to create a more successful final product.</p>
+          <h4>- Power of the physical system</h4>
+          <p>I always start by thinking about the physical experience first before going into a digital one. Thinking about what we are used to and applying it to digital gives an illusion of realism.</p>
+          <h4>- Don't underestimate yourself</h4>
+          <p>Collaborating with multiple teams, I had to constantly coordinate between Developers and PMs for data asks and to make sure my design was feasible. Balancing business and user needs. The project pushed me to brainstorm ways in which we could incorporate the business needs while not taking away from a smooth experience.</p>
+        </div>
+      </div>
+      <div style="margin-top: 72px; padding-top: 28px; border-top: 1px solid #ECEAE4; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap">
+        <a href="./#works" style="font-size: 13px; font-weight: 600; color: #6f6959">← All projects</a>
+        <a href="mailto:srotaswini.payal@gmail.com" class="hv-ink" style="display: inline-block; border: 1px solid #101010; border-radius: 999px; padding: 10px 22px; font-size: 12px; font-weight: 600">Email me</a>
+      </div>
+    </section>
+
+    </div>
+</div>
+</div>
+<script src="./site.js?v=20261013a"></script>
+<script>
+(function () {
+ document.querySelectorAll('.ed-car').forEach(function (car) {
+  var track = car.querySelector('.ed-car-track'), n = track.children.length, cur = 0;
+  var dots = Array.prototype.slice.call(car.querySelectorAll('.ed-car-dots button'));
+  function go(i) { cur = (i + n) % n; track.style.transform = 'translateX(-' + (cur * 100) + '%)'; dots.forEach(function (d, k) { d.classList.toggle('is-on', k === cur); }); }
+  var timer = setInterval(function () { go(cur + 1); }, 5000);
+  function manual(i) { clearInterval(timer); go(i); }
+  car.querySelector('.ed-car-prev').addEventListener('click', function () { manual(cur - 1); });
+  car.querySelector('.ed-car-next').addEventListener('click', function () { manual(cur + 1); });
+  dots.forEach(function (d, k) { d.addEventListener('click', function () { manual(k); }); });
+  go(0);
+ });
+})();
+</script>
+</body>
+</html>
