@@ -133,3 +133,51 @@
 
 /* Make the hidden attribute win over inline display styles (home tabs) */
 [hidden] { display: none !important; }
+
+/* ===== Mobile & tablet (desktop untouched) ===== */
+.m-menu-btn { display: none; }
+@media (max-width: 900px) {
+  nav { position: relative; padding-left: 16px !important; }
+  nav > div:nth-of-type(1) { display: none !important; }
+  nav.m-open > div:nth-of-type(1) { display: flex !important; position: absolute; top: calc(100% + 8px); left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0 !important; background: #FDFCF8; border-radius: 18px; box-shadow: 0 12px 32px rgba(16,16,16,.14); padding: 8px; z-index: 60; font-size: 15px !important; }
+  nav.m-open > div:nth-of-type(1) a { padding: 12px 14px; border-radius: 12px; }
+  .m-menu-btn { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 999px; border: 1px solid #E3DBCC; background: transparent; color: #101010; cursor: pointer; padding: 0; }
+
+  /* every side-by-side layout stacks */
+  [style*="grid-template-columns"]:not(.m-keep) { grid-template-columns: minmax(0, 1fr) !important; }
+  .cs aside { display: none !important; }
+
+  /* headings scaled for small screens */
+  h1[style*="font-size: 62px"] { font-size: 40px !important; }
+  h1[style*="font-size: 38px"] { font-size: 28px !important; }
+  h2[style*="font-size: 42px"] { font-size: 30px !important; }
+  h2[style*="font-size: 30px"], h2[style*="font-size: 34px"] { font-size: 24px !important; }
+  p[style*="font-size: 36px"] { font-size: 26px !important; }
+
+  /* home project cards: image on top, tighter padding */
+  .hv-card { padding: 22px !important; gap: 22px !important; }
+  .hv-card > div:last-child { order: -1; }
+}
+@media (max-width: 600px) {
+  .cs > div, .cs > div > div[style*="max-width: 1200px"] { padding-left: 18px !important; padding-right: 18px !important; }
+}
+@media (max-width: 760px) {
+  .m-cycle { height: auto !important; min-width: 0 !important; display: flex; flex-direction: column; gap: 12px; margin: 24px 0 8px !important; }
+  .m-cycle > * { position: static !important; transform: none !important; width: auto !important; left: auto !important; top: auto !important; }
+  .m-cycle > svg { display: none !important; }
+  .m-cycle > div:first-of-type { text-align: left !important; margin-bottom: 4px; }
+}
+@media (max-width: 600px) {
+  .hero-window-wrap { max-width: 270px; }
+  .pw-chip { font-size: 12px; padding: 9px 16px; }
+  .pw-chip-1 { left: -14px; top: 120px; }
+  .pw-chip-2 { right: -10px; top: 40px; }
+  .pw-chip-3 { right: -12px; bottom: 54px; }
+  .hv-card h3 { font-size: 22px !important; }
+  .hv-card p { margin: 14px 0 18px !important; }
+}
+@media (max-width: 900px) {
+  .ed-side.ed-home { padding-right: 0 !important; gap: 28px !important; }
+  .ed-home-text { position: static !important; max-width: none !important; }
+  .ed-side.ed-home img { max-width: 320px; margin: 0 auto; }
+}

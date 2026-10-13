@@ -74,3 +74,19 @@
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { open(); return; }
   window.setTimeout(open, 250);
 })();
+
+// Mobile menu button
+(function () {
+  Array.prototype.forEach.call(document.querySelectorAll('.m-menu-btn'), function (btn) {
+    var nav = btn.closest('nav');
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = nav.classList.toggle('m-open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    Array.prototype.forEach.call(nav.querySelectorAll('div:first-of-type a'), function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('m-open'); btn.setAttribute('aria-expanded', 'false'); });
+    });
+    document.addEventListener('click', function (e) { if (!nav.contains(e.target)) { nav.classList.remove('m-open'); btn.setAttribute('aria-expanded', 'false'); } });
+  });
+})();
